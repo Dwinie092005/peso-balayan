@@ -1,0 +1,368 @@
+/* =====================================================
+   NSRP UPLOADS - File Upload Component Styles
+   PESO Balayan Employment System
+   ===================================================== */
+
+/* ---- DROP ZONE ---- */
+.upload-zone {
+    position: relative;
+    border: 2px dashed var(--gray-200);
+    border-radius: var(--radius-lg);
+    background: var(--gray-50);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+.upload-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(8,145,178,0.04));
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.upload-zone:hover::before,
+.upload-zone.drag-over::before {
+    opacity: 1;
+}
+
+.upload-zone.drag-over {
+    border-style: solid;
+    transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* ---- DROP ZONE CONTENT ---- */
+.upload-zone-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.375rem;
+    margin: 0 auto 0.875rem;
+    transition: transform 0.25s;
+}
+
+.upload-zone:hover .upload-zone-icon,
+.upload-zone.drag-over .upload-zone-icon {
+    transform: scale(1.1) translateY(-2px);
+    background: var(--primary);
+    color: var(--white);
+}
+
+.upload-zone-text {
+    font-family: var(--font);
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin-bottom: 0.375rem;
+}
+
+.upload-zone-text strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.upload-zone-hint {
+    font-family: var(--font);
+    font-size: 0.75rem;
+    color: var(--gray-400);
+}
+
+.upload-zone-hint span {
+    display: inline-block;
+    padding: 0.1875rem 0.5rem;
+    background: var(--gray-100);
+    border-radius: 20px;
+    margin: 0.25rem 2px;
+    font-weight: 500;
+}
+
+/* ---- AVATAR UPLOAD ---- */
+.avatar-upload-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.avatar-preview-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--gray-200);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--gray-100);
+    flex-shrink: 0;
+}
+
+.avatar-preview-circle:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.avatar-preview-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-preview-circle .avatar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(37, 99, 235, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: var(--white);
+    font-size: 1.25rem;
+}
+
+.avatar-preview-circle:hover .avatar-overlay {
+    opacity: 1;
+}
+
+.avatar-preview-circle input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.avatar-upload-text {
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    color: var(--gray-500);
+    text-align: center;
+}
+
+.avatar-upload-text span {
+    display: block;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ---- FILE PREVIEW LIST ---- */
+.file-preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.875rem;
+}
+
+.file-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    transition: var(--transition);
+    animation: fileIn 0.25s ease;
+}
+
+@keyframes fileIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.file-preview-item:hover {
+    border-color: var(--primary);
+    background: var(--gray-50);
+}
+
+.file-preview-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.file-preview-icon.pdf { background: #fee2e2; color: #dc2626; }
+.file-preview-icon.doc { background: #dbeafe; color: #2563eb; }
+.file-preview-icon.img { background: #d1fae5; color: #059669; }
+
+.file-preview-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-preview-name {
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-preview-size {
+    font-family: var(--font);
+    font-size: 0.6875rem;
+    color: var(--gray-400);
+    margin-top: 1px;
+}
+
+/* ---- UPLOAD PROGRESS ---- */
+.file-progress {
+    margin-top: 4px;
+    height: 3px;
+    background: var(--gray-100);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.file-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.file-preview-remove {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: var(--gray-400);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.file-preview-remove:hover {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+/* ---- UPLOAD STATUS BADGE ---- */
+.upload-badge {
+    padding: 0.1875rem 0.5rem;
+    border-radius: 20px;
+    font-family: var(--font);
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+
+.upload-badge.uploading { background: var(--primary-light); color: var(--primary); }
+.upload-badge.done      { background: var(--success-light); color: var(--success); }
+.upload-badge.error     { background: var(--danger-light); color: var(--danger); }
+
+/* ---- UPLOAD CARD (for document slots) ---- */
+.upload-card {
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.upload-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.upload-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.upload-card-header .upload-card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.upload-card-title {
+    font-family: var(--font);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.upload-card-required {
+    font-size: 0.6875rem;
+    color: var(--danger);
+    font-weight: 500;
+}
+
+.upload-card-body {
+    padding: 1rem;
+}
+
+/* ---- IMAGE THUMBNAIL ---- */
+.upload-thumb-preview {
+    display: none;
+    width: 100%;
+    max-height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--gray-100);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 640px) {
+    .upload-zone {
+        padding: 1.5rem 1rem;
+    }
+
+    .file-preview-name {
+        font-size: 0.75rem;
+    }
+}

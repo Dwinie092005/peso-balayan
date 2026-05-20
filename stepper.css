@@ -1,0 +1,333 @@
+/* =====================================================
+   NSRP STEPPER - Multi-Step Form Progress Indicator
+   PESO Balayan Employment System
+   ===================================================== */
+
+/* ---- STEPPER CONTAINER ---- */
+.form-stepper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    position: relative;
+    overflow-x: auto;
+}
+
+/* ---- CONNECTING LINE ---- */
+.stepper-track {
+    position: absolute;
+    top: 2.25rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gray-200);
+    z-index: 0;
+    margin: 0 4rem;
+}
+
+.stepper-track-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+}
+
+/* ---- STEP ITEM ---- */
+.stepper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 80px;
+    max-width: 120px;
+    cursor: pointer;
+}
+
+.stepper-item:not(.completed):not(.active) {
+    cursor: default;
+}
+
+/* ---- STEP CIRCLE ---- */
+.stepper-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font);
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: 2px solid var(--gray-200);
+    background: var(--white);
+    color: var(--gray-400);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: var(--shadow-sm);
+}
+
+.stepper-item.completed .stepper-circle {
+    border-color: var(--success);
+    background: var(--success);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.stepper-item.completed .stepper-circle::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid var(--success-light);
+}
+
+.stepper-item.active .stepper-circle {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--white);
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+}
+
+.stepper-item.active .stepper-circle::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(37, 99, 235, 0.3);
+    animation: pulseRing 1.5s ease infinite;
+}
+
+@keyframes pulseRing {
+    0%   { transform: scale(1); opacity: 1; }
+    70%  { transform: scale(1.2); opacity: 0; }
+    100% { transform: scale(1.2); opacity: 0; }
+}
+
+/* ---- STEP CHECKMARK ---- */
+.stepper-check {
+    display: none;
+}
+
+.stepper-item.completed .stepper-check {
+    display: block;
+}
+
+.stepper-item.completed .stepper-number {
+    display: none;
+}
+
+/* ---- STEP LABEL ---- */
+.stepper-label {
+    font-family: var(--font);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--gray-400);
+    text-align: center;
+    white-space: nowrap;
+    transition: color 0.3s;
+    line-height: 1.3;
+    max-width: 90px;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.stepper-item.completed .stepper-label {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.stepper-item.active .stepper-label {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* ---- STEPPER COMPACT (mobile) ---- */
+.form-stepper-compact {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+}
+
+.stepper-compact-indicator {
+    display: flex;
+    gap: 0.3125rem;
+}
+
+.stepper-compact-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    transition: var(--transition);
+}
+
+.stepper-compact-dot.completed {
+    background: var(--success);
+}
+
+.stepper-compact-dot.active {
+    background: var(--primary);
+    width: 18px;
+    border-radius: 3px;
+}
+
+.stepper-compact-info {
+    flex: 1;
+}
+
+.stepper-compact-step {
+    font-family: var(--font);
+    font-size: 0.6875rem;
+    color: var(--gray-400);
+    font-weight: 500;
+}
+
+.stepper-compact-title {
+    font-family: var(--font);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+/* ---- STEP PANELS ---- */
+.step-panel {
+    display: none;
+    animation: panelIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-panel.active {
+    display: block;
+}
+
+.step-panel.slide-left {
+    animation: panelSlideLeft 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-panel.slide-right {
+    animation: panelSlideRight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes panelIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes panelSlideLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes panelSlideRight {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- STEP NAVIGATION ---- */
+.step-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--gray-100);
+    gap: 1rem;
+}
+
+.btn-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    font-family: var(--font);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    line-height: 1;
+}
+
+.btn-step-prev {
+    background: var(--gray-100);
+    color: var(--gray-600);
+}
+
+.btn-step-prev:hover {
+    background: var(--gray-200);
+    color: var(--gray-800);
+}
+
+.btn-step-next {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    margin-left: auto;
+}
+
+.btn-step-next:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #1e3a8a);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+}
+
+.btn-step-next:active {
+    transform: translateY(0);
+}
+
+.btn-step-submit {
+    background: linear-gradient(135deg, var(--success), #047857);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    padding: 0.75rem 2rem;
+    font-size: 0.9375rem;
+    margin-left: auto;
+}
+
+.btn-step-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+}
+
+.btn-step:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 640px) {
+    .form-stepper {
+        display: none;
+    }
+
+    .form-stepper-compact {
+        display: flex;
+    }
+
+    .stepper-label {
+        display: none;
+    }
+
+    .step-nav {
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+
+    .btn-step {
+        font-size: 0.8125rem;
+        padding: 0.5625rem 1rem;
+    }
+}

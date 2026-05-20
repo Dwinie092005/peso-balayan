@@ -1,0 +1,251 @@
+/* ==========================================================
+   DATA TABLES — tables.css
+   Reusable table component and badge styles.
+   ========================================================== */
+
+/* Wrapper */
+.data-table-wrap {
+    background: var(--color-surface, #ffffff);
+    border-radius: var(--radius-lg, 14px);
+    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,.06));
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+/* Header Bar */
+.data-table-wrap__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.4rem;
+    border-bottom: 1px solid var(--color-border, #eef0f4);
+}
+
+.data-table-wrap__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #1a1a2e);
+    margin: 0;
+}
+
+.data-table-wrap__view-all {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-primary, #2563eb);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: opacity 0.2s;
+}
+
+.data-table-wrap__view-all:hover {
+    opacity: 0.75;
+}
+
+/* Scroll Container */
+.data-table-wrap__scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    color: var(--color-text-primary, #1a1a2e);
+}
+
+/* Head */
+.data-table thead tr {
+    background: var(--color-bg, #f6f8fc);
+    border-bottom: 1px solid var(--color-border, #eef0f4);
+}
+
+.data-table thead th {
+    padding: 0.75rem 1.1rem;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted, #7b8a9a);
+    white-space: nowrap;
+}
+
+/* Body */
+.data-table tbody tr {
+    border-bottom: 1px solid var(--color-border, #eef0f4);
+    transition: background 0.15s;
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background: var(--color-hover, #f0f4ff);
+}
+
+.data-table tbody td {
+    padding: 0.85rem 1.1rem;
+    vertical-align: middle;
+    color: var(--color-text-secondary, #374151);
+}
+
+/* Empty State */
+.data-table__empty {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--color-text-muted, #7b8a9a);
+}
+
+.data-table__empty i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    opacity: 0.5;
+}
+
+.data-table__empty span {
+    font-size: 0.85rem;
+}
+
+/* ── ACTIVITY FEED ──────────────────────────────── */
+.activity-feed {
+    background: var(--color-surface, #ffffff);
+    border-radius: var(--radius-lg, 14px);
+    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,.06));
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.activity-feed__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.4rem;
+    border-bottom: 1px solid var(--color-border, #eef0f4);
+}
+
+.activity-feed__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #1a1a2e);
+    margin: 0;
+}
+
+.activity-feed__view-all {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-primary, #2563eb);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: opacity 0.2s;
+}
+
+.activity-feed__view-all:hover {
+    opacity: 0.75;
+}
+
+.activity-feed__list {
+    padding: 0.5rem 0;
+}
+
+.activity-feed__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.85rem 1.4rem;
+    transition: background 0.15s;
+}
+
+.activity-feed__item:hover {
+    background: var(--color-hover, #f0f4ff);
+}
+
+.activity-feed__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.activity-feed__icon--blue   { background: rgba(37,99,235,.1);  color: var(--color-primary, #2563eb); }
+.activity-feed__icon--green  { background: rgba(22,163,74,.1);  color: var(--color-success, #16a34a); }
+.activity-feed__icon--orange { background: rgba(245,158,11,.1); color: var(--color-warning, #f59e0b); }
+.activity-feed__icon--purple { background: rgba(124,58,237,.1); color: var(--color-accent, #7c3aed);  }
+.activity-feed__icon--red    { background: rgba(220,38,38,.1);  color: var(--color-danger, #dc2626);  }
+
+.activity-feed__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-feed__item-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #1a1a2e);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.activity-feed__item-sub {
+    font-size: 0.75rem;
+    color: var(--color-text-muted, #7b8a9a);
+    margin: 0.15rem 0 0;
+}
+
+.activity-feed__time {
+    font-size: 0.72rem;
+    color: var(--color-text-muted, #7b8a9a);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.activity-feed__empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--color-text-muted, #7b8a9a);
+}
+
+.activity-feed__empty i {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.45;
+}
+
+.activity-feed__empty p {
+    font-size: 0.83rem;
+    margin: 0;
+}
+
+/* ── STATUS BADGES ───────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25em 0.7em;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    line-height: 1;
+}
+
+.badge--blue   { background: rgba(37,99,235,.1);  color: var(--color-primary, #2563eb); }
+.badge--green  { background: rgba(22,163,74,.1);  color: var(--color-success, #16a34a); }
+.badge--orange { background: rgba(245,158,11,.1); color: var(--color-warning, #f59e0b); }
+.badge--purple { background: rgba(124,58,237,.1); color: var(--color-accent, #7c3aed);  }
+.badge--red    { background: rgba(220,38,38,.1);  color: var(--color-danger, #dc2626);  }
+.badge--gray   { background: rgba(100,116,139,.1);color: var(--color-text-muted, #64748b); }
