@@ -1,0 +1,295 @@
+/* ============================================================
+   PESO Balayan IMIS — Job Card Component Styles
+   File: public/css/components/job-card.css
+   ============================================================ */
+
+/* ── Base card ────────────────────────────────────────────── */
+.job-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.job-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+/* Featured indicator */
+.job-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--royal), var(--royal-light));
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Status overlay for closed/expired */
+.job-card.closed { opacity: 0.65; }
+
+/* ── Card header: logo + company + bookmark ───────────────── */
+.job-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.job-card-company-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.job-card-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--royal);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.job-card-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.job-card-company-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--royal);
+    margin: 0 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.job-card-location {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.job-card-location i { font-size: 10px; }
+
+/* Bookmark button */
+.job-card-bookmark {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px;
+    transition: color var(--transition), transform var(--transition);
+    flex-shrink: 0;
+}
+
+.job-card-bookmark:hover { color: var(--royal); transform: scale(1.15); }
+.job-card-bookmark.saved { color: var(--royal); }
+.job-card-bookmark.saved i::before { content: '\ea06'; } /* ti-bookmark-filled */
+
+/* ── Job title ────────────────────────────────────────────── */
+.job-card-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    display: block;
+    transition: color var(--transition);
+}
+
+.job-card-title:hover { color: var(--royal); }
+
+/* ── Meta badges row ──────────────────────────────────────── */
+.job-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.job-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid;
+}
+
+.job-card-badge i { font-size: 10px; }
+
+.job-card-badge.type-full_time  { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.job-card-badge.type-part_time  { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+.job-card-badge.type-contract   { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+.job-card-badge.type-temporary  { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+.job-card-badge.type-internship { background: #faf5ff; color: #7c3aed; border-color: #ddd6fe; }
+
+.job-card-badge.salary  { background: #f0fdfa; color: #0d9488; border-color: #99f6e4; }
+.job-card-badge.edu     { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+.job-card-badge.exp     { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+.job-card-badge.status  {}
+
+.job-card-badge.status-active   { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+.job-card-badge.status-draft    { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+.job-card-badge.status-closed   { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+.job-card-badge.status-expired  { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+
+/* ── Skill tags ───────────────────────────────────────────── */
+.job-card-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 14px;
+    min-height: 20px;
+}
+
+.job-skill-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    background: #f8fafc;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+}
+
+.job-skill-more {
+    font-size: 10px;
+    padding: 2px 7px;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+}
+
+/* ── Card footer: slots + action ──────────────────────────── */
+.job-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+    margin-top: auto;
+    gap: 8px;
+}
+
+.job-card-slots {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.job-card-slots i { font-size: 11px; }
+.job-card-slots.low { color: #d97706; }
+
+.job-card-posted {
+    font-size: 10.5px;
+    color: var(--text-muted);
+}
+
+/* Action buttons */
+.btn-card-apply {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    background: var(--royal);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--transition);
+    white-space: nowrap;
+}
+
+.btn-card-apply:hover { background: var(--navy); }
+
+.btn-card-applied {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: default;
+    white-space: nowrap;
+}
+
+.btn-card-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: #f8fafc;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+.btn-card-edit:hover { background: #f1f5f9; color: var(--text-primary); }
+
+/* ── Application count chip (employer/admin) ──────────────── */
+.job-card-app-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 3px 9px;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+.job-card-app-count:hover {
+    background: #eff6ff;
+    color: var(--royal);
+    border-color: #bfdbfe;
+}
+
+.job-card-app-count i { font-size: 11px; }

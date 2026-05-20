@@ -1,0 +1,358 @@
+/* =====================================================
+   REFERRALS.CSS
+   PESO Balayan — Referral Management Styles
+   ===================================================== */
+
+/* ---- REFERRAL STATUS BADGES ---- */
+.ref-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    padding: 0.25rem 0.6875rem;
+    border-radius: 20px;
+    font-family: var(--font);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ref-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.ref-badge.pending        { background: #fef3c7; color: #92400e; }
+.ref-badge.pending        .ref-badge-dot { background: #d97706; }
+
+.ref-badge.endorsed       { background: #dbeafe; color: #1e40af; }
+.ref-badge.endorsed       .ref-badge-dot { background: #2563eb; }
+
+.ref-badge.accepted       { background: #d1fae5; color: #065f46; }
+.ref-badge.accepted       .ref-badge-dot { background: #059669; }
+
+.ref-badge.rejected       { background: #fee2e2; color: #991b1b; }
+.ref-badge.rejected       .ref-badge-dot { background: #dc2626; }
+
+.ref-badge.hired          { background: #ede9fe; color: #5b21b6; }
+.ref-badge.hired          .ref-badge-dot { background: #7c3aed; }
+
+.ref-badge.no_show        { background: #f1f5f9; color: #475569; }
+.ref-badge.no_show        .ref-badge-dot { background: #94a3b8; }
+
+/* ---- REFERRAL CARD ---- */
+.referral-card {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 1.125rem 1.25rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.referral-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+    background: var(--gray-200);
+    transition: background 0.3s;
+}
+
+.referral-card:hover { box-shadow: var(--shadow); border-color: var(--gray-300); }
+
+.referral-card.pending::before   { background: #d97706; }
+.referral-card.endorsed::before  { background: #2563eb; }
+.referral-card.accepted::before  { background: #059669; }
+.referral-card.rejected::before  { background: #dc2626; }
+.referral-card.hired::before     { background: #7c3aed; }
+
+.referral-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.referral-card-applicant {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.referral-card-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gray-100);
+    flex-shrink: 0;
+    background: var(--gray-100);
+}
+
+.referral-card-name {
+    font-family: var(--font);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1.2;
+}
+
+.referral-card-meta {
+    font-family: var(--font);
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: 1px;
+}
+
+.referral-card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.375rem 1rem;
+    margin-bottom: 0.875rem;
+}
+
+.referral-card-field {
+    font-family: var(--font);
+}
+
+.referral-card-field-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.referral-card-field-value {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-top: 1px;
+}
+
+.referral-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--gray-100);
+    flex-wrap: wrap;
+}
+
+/* ---- REFERRAL TIMELINE ---- */
+.referral-timeline {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.referral-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5625rem;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 2px;
+    background: var(--gray-100);
+    border-radius: 2px;
+}
+
+.ref-timeline-item {
+    position: relative;
+    margin-bottom: 1.125rem;
+    padding-bottom: 1.125rem;
+    border-bottom: 1px solid var(--gray-50);
+}
+
+.ref-timeline-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.ref-timeline-dot {
+    position: absolute;
+    left: -1.1875rem;
+    top: 0.25rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    background: var(--gray-300);
+    box-shadow: 0 0 0 2px var(--gray-200);
+    z-index: 1;
+}
+
+.ref-timeline-item.submitted   .ref-timeline-dot { background: #94a3b8; }
+.ref-timeline-item.endorsed    .ref-timeline-dot { background: #2563eb; }
+.ref-timeline-item.accepted    .ref-timeline-dot { background: #059669; }
+.ref-timeline-item.rejected    .ref-timeline-dot { background: #dc2626; }
+.ref-timeline-item.hired       .ref-timeline-dot { background: #7c3aed; }
+.ref-timeline-item.interview   .ref-timeline-dot { background: #0891b2; }
+.ref-timeline-item.no_show     .ref-timeline-dot { background: #f59e0b; }
+
+.ref-timeline-content {
+    font-family: var(--font);
+}
+
+.ref-timeline-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 2px;
+}
+
+.ref-timeline-detail {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    line-height: 1.5;
+}
+
+.ref-timeline-time {
+    font-size: 0.6875rem;
+    color: var(--gray-300);
+    margin-top: 2px;
+}
+
+/* ---- REFERRAL STATS ROW ---- */
+.referral-stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.referral-stat-card {
+    background: var(--white);
+    border: 1.5px solid var(--gray-100);
+    border-radius: var(--radius);
+    padding: 1rem;
+    text-align: center;
+}
+
+.referral-stat-num {
+    font-family: var(--font);
+    font-size: 1.625rem;
+    font-weight: 800;
+    color: var(--gray-900);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.referral-stat-num.blue   { color: var(--primary); }
+.referral-stat-num.green  { color: var(--success); }
+.referral-stat-num.purple { color: #7c3aed; }
+.referral-stat-num.red    { color: var(--danger); }
+
+.referral-stat-label {
+    font-family: var(--font);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ---- FILTER BAR ---- */
+.ref-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.ref-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    padding: 0.375rem 0.875rem;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 20px;
+    font-family: var(--font);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    background: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.ref-filter-chip:hover          { border-color: var(--primary); color: var(--primary); }
+.ref-filter-chip.active         { background: var(--primary); border-color: var(--primary); color: var(--white); }
+
+.ref-filter-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 20px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    background: rgba(255,255,255,0.25);
+    color: inherit;
+}
+
+.ref-filter-chip:not(.active) .ref-filter-count {
+    background: var(--gray-100);
+    color: var(--gray-500);
+}
+
+/* ---- REFERRAL LIST ---- */
+.referral-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* ---- EMPTY STATE ---- */
+.ref-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--gray-400);
+}
+
+.ref-empty-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin: 0 auto 1rem;
+    color: var(--gray-300);
+}
+
+.ref-empty-title {
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-600);
+    margin-bottom: 0.375rem;
+}
+
+.ref-empty-text {
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    color: var(--gray-400);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 640px) {
+    .referral-card-body { grid-template-columns: 1fr; }
+    .referral-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .ref-filter-bar     { gap: 0.375rem; }
+}

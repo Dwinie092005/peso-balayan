@@ -1,0 +1,27 @@
+Options -Indexes
+Options -MultiViews
+
+RewriteEngine On
+
+# Block access to sensitive directories
+RewriteRule ^(app|config|uploads|database|vendor)/ - [F,L]
+
+# Redirect all requests to index.php (front controller pattern)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Disable PHP execution in uploads
+<IfModule mod_php.c>
+    <Directory "../uploads">
+        php_flag engine off
+    </Directory>
+</IfModule>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PESO Balayan – Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --primary-blue:   #2563EB;
+    --primary-dark:   #1E40AF;
+    --accent-blue:    #3B82F6;
+    --light-blue:     #DBEAFE;
+    --danger-red:     #DC2626;
+    --warning-yellow: #FBBF24;
+    --white:          #FFFFFF;
+    --gray-text:      #6B7280;
+    --gray-border:    #E5E7EB;
+    --light-bg:       #F9FAFB;
+    --input-bg:       #F0F4FF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  /* ── LEFT PANEL ─────────────────────────────────────────── */
+  .left-panel {
+    width: 55%;
+    background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 45%, #3B82F6 80%, #60A5FA 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    overflow: hidden;
+    animation: panelFadeIn 0.8s ease forwards;
+  }
+
+  @keyframes panelFadeIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Animated floating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    animation: floatOrb var(--dur, 8s) ease-in-out infinite;
+  }
+  .orb-1 { width:340px; height:340px; top:-80px; right:-100px; --dur:10s; }
+  .orb-2 { width:200px; height:200px; bottom:60px; left:-60px; --dur:12s; animation-delay:-3s; }
+  .orb-3 { width:120px; height:120px; top:50%; right:40px; --dur:9s; animation-delay:-6s; }
+  .orb-4 { width:80px; height:80px; bottom:160px; right:120px; --dur:7s; animation-delay:-1s; }
+
+  @keyframes floatOrb {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%     { transform: translate(12px,-18px) scale(1.04); }
+    66%     { transform: translate(-10px,14px) scale(0.97); }
+  }
+
+  /* Animated mesh dots */
+  .dots-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+    background-size: 36px 36px;
+    animation: driftDots 20s linear infinite;
+  }
+  @keyframes driftDots {
+    from { background-position: 0 0; }
+    to   { background-position: 36px 36px; }
+  }
+
+  /* Brand */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    position: relative;
+    animation: slideDown 0.7s 0.3s ease both;
+  }
+  @keyframes slideDown {
+    from { opacity:0; transform:translateY(-20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .brand-icon {
+    width: 58px; height: 58px;
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 16px;
+    display: flex; align-items:center; justify-content:center;
+    font-size: 26px; color: #fff;
+    backdrop-filter: blur(6px);
+    animation: iconPulse 3s ease-in-out infinite;
+  }
+  @keyframes iconPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+    50%     { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
+  }
+  .brand-text h1 {
+    font-size: 22px; font-weight: 700; color: #fff; line-height: 1.1;
+  }
+  .brand-text p {
+    font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 400;
+  }
+
+  /* Hero text */
+  .hero-heading {
+    position: relative;
+    font-size: 40px; font-weight: 800; color: #fff;
+    line-height: 1.15; margin-bottom: 18px;
+    animation: slideUp 0.7s 0.45s ease both;
+  }
+  .hero-heading span { color: var(--warning-yellow); }
+
+  .hero-sub {
+    position: relative;
+    font-size: 14px; color: rgba(255,255,255,0.78);
+    line-height: 1.7; max-width: 400px; margin-bottom: 48px;
+    animation: slideUp 0.7s 0.55s ease both;
+  }
+  @keyframes slideUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* Feature pills */
+  .features {
+    position: relative;
+    display: flex; flex-direction: column; gap: 14px;
+    animation: slideUp 0.7s 0.65s ease both;
+  }
+  .feature-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px; padding: 14px 20px;
+    backdrop-filter: blur(4px);
+    transition: background 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .feature-item:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateX(6px);
+  }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items:center; justify-content:center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .fi-blue  { background: rgba(255,255,255,0.2); color: #fff; }
+  .fi-yell  { background: rgba(251,191,36,0.3);  color: var(--warning-yellow); }
+  .fi-green { background: rgba(52,211,153,0.3);  color: #34D399; }
+  .feature-text h4 { font-size: 13px; font-weight: 600; color: #fff; }
+  .feature-text p  { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+
+  /* Stats row */
+  .stats-row {
+    position: relative;
+    display: flex; gap: 24px; margin-top: 44px;
+    animation: slideUp 0.7s 0.75s ease both;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-size: 28px; font-weight: 800; color: #fff;
+    display: block; line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px; color: rgba(255,255,255,0.65);
+    font-weight: 400; display: block; margin-top: 4px;
+  }
+  .stat-divider {
+    width: 1px; background: rgba(255,255,255,0.2);
+    align-self: stretch;
+  }
+
+  /* ── RIGHT PANEL ─────────────────────────────────────────── */
+  .right-panel {
+    width: 45%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px 52px;
+    background: var(--white);
+    position: relative;
+    animation: panelFadeInRight 0.8s 0.2s ease both;
+  }
+  @keyframes panelFadeInRight {
+    from { opacity:0; transform:translateX(30px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+
+  /* Subtle bg pattern */
+  .right-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 90% 10%, #DBEAFE 0%, transparent 40%),
+                      radial-gradient(circle at 10% 90%, #EFF6FF 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .form-box {
+    width: 100%; max-width: 400px; position: relative;
+    animation: formSlideIn 0.7s 0.5s ease both;
+  }
+  @keyframes formSlideIn {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .form-top-icon {
+    width: 52px; height: 52px;
+    background: var(--light-blue);
+    border-radius: 14px;
+    display: flex; align-items:center; justify-content:center;
+    font-size: 22px; color: var(--primary-blue);
+    margin-bottom: 24px;
+    animation: iconBounce 2s 1.2s ease-in-out infinite;
+  }
+  @keyframes iconBounce {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-5px); }
+  }
+
+  .form-title {
+    font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 6px;
+  }
+  .form-subtitle {
+    font-size: 13px; color: var(--gray-text); margin-bottom: 36px;
+  }
+
+  /* Input group */
+  .input-group {
+    margin-bottom: 20px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .input-group:nth-child(1) { animation-delay: 0.7s; }
+  .input-group:nth-child(2) { animation-delay: 0.8s; }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(12px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .input-group label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: #374151; margin-bottom: 8px; letter-spacing: 0.3px;
+  }
+  .input-wrap {
+    position: relative;
+  }
+  .input-wrap i.icon-left {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--gray-text); font-size: 15px; pointer-events: none;
+    transition: color 0.3s;
+  }
+  .input-wrap input {
+    width: 100%; padding: 13px 44px 13px 42px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 12px; font-family: 'Poppins', sans-serif;
+    font-size: 14px; color: #111827;
+    background: var(--input-bg);
+    outline: none;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  }
+  .input-wrap input:focus {
+    border-color: var(--primary-blue);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+  }
+  .input-wrap input:focus + .icon-left,
+  .input-wrap input:focus ~ .icon-left { color: var(--primary-blue); }
+  .input-wrap .icon-right {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--gray-text); font-size: 15px; cursor: pointer;
+    background: none; border: none;
+    transition: color 0.3s;
+  }
+  .input-wrap .icon-right:hover { color: var(--primary-blue); }
+
+  /* Row between label and forgot */
+  .label-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+  }
+  .label-row label { margin-bottom: 0; }
+  .forgot-link {
+    font-size: 12px; color: var(--primary-blue); font-weight: 500;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .forgot-link:hover { opacity: 0.75; }
+
+  /* Remember row */
+  .remember-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 28px; margin-top: 6px;
+    animation: fadeUp 0.5s 0.9s ease both;
+  }
+  .remember-row input[type="checkbox"] {
+    width: 16px; height: 16px; accent-color: var(--primary-blue); cursor: pointer;
+  }
+  .remember-row label {
+    font-size: 13px; color: var(--gray-text); cursor: pointer;
+  }
+
+  /* Submit button */
+  .btn-login {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+    color: #fff; font-family: 'Poppins', sans-serif;
+    font-size: 15px; font-weight: 600;
+    border: none; border-radius: 12px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.3s;
+    animation: fadeUp 0.5s 1s ease both;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+  }
+  .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(37,99,235,0.45);
+  }
+  .btn-login:active { transform: translateY(0); }
+
+  /* Button shimmer */
+  .btn-login::after {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2.5s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%   { left: -100%; }
+    60%  { left: 150%; }
+    100% { left: 150%; }
+  }
+
+  /* Security note */
+  .security-note {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 20px; justify-content: center;
+    animation: fadeUp 0.5s 1.1s ease both;
+  }
+  .security-note i { font-size: 13px; color: #10B981; }
+  .security-note span { font-size: 11px; color: var(--gray-text); }
+
+  /* Register link */
+  .register-link {
+    text-align: center; margin-top: 24px; font-size: 13px;
+    color: var(--gray-text);
+    animation: fadeUp 0.5s 1.2s ease both;
+  }
+  .register-link a {
+    color: var(--primary-blue); font-weight: 600;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .register-link a:hover { opacity: 0.75; }
+
+  /* Role badge selector */
+  .role-tabs {
+    display: flex; gap: 8px; margin-bottom: 24px;
+    animation: fadeUp 0.5s 0.65s ease both;
+  }
+  .role-tab {
+    flex: 1; padding: 8px 4px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 10px; background: var(--white);
+    font-family: 'Poppins', sans-serif; font-size: 11px;
+    font-weight: 500; color: var(--gray-text); cursor: pointer;
+    text-align: center; transition: all 0.25s;
+  }
+  .role-tab:hover { border-color: var(--accent-blue); color: var(--primary-blue); }
+  .role-tab.active {
+    background: var(--light-blue); border-color: var(--primary-blue);
+    color: var(--primary-blue); font-weight: 600;
+  }
+
+  /* Loading spinner (hidden by default) */
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff; border-radius: 50%;
+    display: none; animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error message */
+  .error-msg {
+    display: none; align-items: center; gap: 8px;
+    background: #FEF2F2; border: 1px solid #FECACA;
+    border-radius: 10px; padding: 10px 14px;
+    margin-bottom: 18px; font-size: 12px; color: var(--danger-red);
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    body { flex-direction: column; overflow-y: auto; }
+    .left-panel  { width: 100%; padding: 40px 32px; min-height: 260px; }
+    .right-panel { width: 100%; padding: 40px 24px; }
+    .hero-heading { font-size: 28px; }
+    .stats-row { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ LEFT PANEL ══════════════ -->
+<div class="left-panel">
+  <div class="dots-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+
+  <!-- Brand -->
+  <div class="brand">
+    <div class="brand-icon">
+      <i class="fas fa-briefcase"></i>
+    </div>
+    <div class="brand-text">
+      <h1>PESO Balayan</h1>
+      <p>Public Employment Service Office</p>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <h2 class="hero-heading">
+    Smart Job <span>Matching</span><br>& Referral System
+  </h2>
+  <p class="hero-sub">
+    Automated qualification filtering and decision support system for streamlined employment services in Balayan, Batangas.
+  </p>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-item">
+      <div class="feature-icon fi-blue">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="feature-text">
+        <h4>AI-Powered Matching Algorithm</h4>
+        <p>Skills · Education · Experience · Location scoring</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon fi-yell">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <div class="feature-text">
+        <h4>Automated Status Tracking</h4>
+        <p>Real-time applicant & job status updates</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon fi-green">
+        <i class="fas fa-shield-halved"></i>
+      </div>
+      <div class="feature-text">
+        <h4>Secure & Compliant System</h4>
+        <p>NSRP forms · Role-based access · Encrypted data</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-num" data-target="1240" id="stat1">0</span>
+      <span class="stat-label">Applicants</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="86" id="stat2">0</span>
+      <span class="stat-label">Employers</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="94" id="stat3">0</span>
+      <span class="stat-label">% Match Rate</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="24" id="stat4">0</span>
+      <span class="stat-label">Hrs Response</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ RIGHT PANEL ══════════════ -->
+<div class="right-panel">
+  <div class="form-box">
+
+    <div class="form-top-icon">
+      <i class="fas fa-right-to-bracket"></i>
+    </div>
+
+    <h2 class="form-title">Welcome Back</h2>
+    <p class="form-subtitle">Sign in to your PESO Balayan account</p>
+
+    <!-- Role selector -->
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="selectRole(this,'applicant')">
+        <i class="fas fa-user"></i> Applicant
+      </button>
+      <button class="role-tab" onclick="selectRole(this,'employer')">
+        <i class="fas fa-building"></i> Employer
+      </button>
+      <button class="role-tab" onclick="selectRole(this,'admin')">
+        <i class="fas fa-user-shield"></i> Admin
+      </button>
+    </div>
+
+    <!-- Error msg -->
+    <div class="error-msg" id="errorMsg">
+      <i class="fas fa-circle-exclamation"></i>
+      <span id="errorText">Invalid credentials. Please try again.</span>
+    </div>
+
+    <!-- Form -->
+    <form id="loginForm" novalidate>
+      <!-- Email -->
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <i class="fas fa-envelope icon-left"></i>
+          <input type="email" id="email" placeholder="Enter your email address" autocomplete="email" required>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="input-group">
+        <div class="label-row">
+          <label for="password">Password</label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <div class="input-wrap">
+          <i class="fas fa-lock icon-left"></i>
+          <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" class="icon-right" onclick="togglePassword()" aria-label="Toggle password visibility">
+            <i class="fas fa-eye" id="eyeIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Remember me -->
+      <div class="remember-row">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember me for 30 days</label>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-login" id="loginBtn">
+        <i class="fas fa-right-to-bracket" id="btnIcon"></i>
+        <span id="btnText">Sign In</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </form>
+
+    <!-- Security note -->
+    <div class="security-note">
+      <i class="fas fa-circle-check"></i>
+      <span>Your data is securely encrypted and protected</span>
+    </div>
+
+    <!-- Register -->
+    <div class="register-link">
+      New applicant? <a href="#">Register here</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── Counter Animation ──────────────────────────────────── */
+  function animateCounter(el, target, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start).toLocaleString();
+    }, 16);
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      animateCounter(document.getElementById('stat1'), 1240, 1800);
+      animateCounter(document.getElementById('stat2'), 86, 1600);
+      animateCounter(document.getElementById('stat3'), 94, 1400);
+      animateCounter(document.getElementById('stat4'), 24, 1200);
+    }, 800);
+  });
+
+  /* ── Role Tab Selection ─────────────────────────────────── */
+  function selectRole(btn, role) {
+    document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    window.selectedRole = role;
+  }
+  window.selectedRole = 'applicant';
+
+  /* ── Toggle Password ────────────────────────────────────── */
+  function togglePassword() {
+    const input = document.getElementById('password');
+    const icon  = document.getElementById('eyeIcon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'fas fa-eye-slash';
+    } else {
+      input.type = 'password';
+      icon.className = 'fas fa-eye';
+    }
+  }
+
+  /* ── Form Submit ────────────────────────────────────────── */
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const errMsg   = document.getElementById('errorMsg');
+
+    errMsg.style.display = 'none';
+
+    if (!email || !password) {
+      document.getElementById('errorText').textContent = 'Please fill in all fields.';
+      errMsg.style.display = 'flex';
+      return;
+    }
+
+    // Show loading state
+    document.getElementById('btnText').textContent = 'Signing in...';
+    document.getElementById('btnIcon').style.display = 'none';
+    document.getElementById('spinner').style.display = 'block';
+    document.getElementById('loginBtn').disabled = true;
+
+    // Simulate async login (replace with fetch() to PHP backend)
+    setTimeout(() => {
+      document.getElementById('btnText').textContent = 'Sign In';
+      document.getElementById('btnIcon').style.display = 'block';
+      document.getElementById('spinner').style.display = 'none';
+      document.getElementById('loginBtn').disabled = false;
+
+      // Demo: show error for wrong creds
+      document.getElementById('errorText').textContent = 'Invalid email or password. Please try again.';
+      errMsg.style.display = 'flex';
+    }, 1800);
+  });
+
+  /* ── Input focus glow ───────────────────────────────────── */
+  document.querySelectorAll('.input-wrap input').forEach(input => {
+    input.addEventListener('focus', () => {
+      input.previousElementSibling && (input.previousElementSibling.style.color = 'var(--primary-blue)');
+    });
+    input.addEventListener('blur', () => {
+      input.previousElementSibling && (input.previousElementSibling.style.color = 'var(--gray-text)');
+    });
+  });
+</script>
+</body>
+</html>

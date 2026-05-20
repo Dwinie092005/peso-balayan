@@ -1,0 +1,361 @@
+/* ============================================================
+   PESO Balayan IMIS — Pagination + Filter Panel Styles
+   File: public/css/components/pagination.css
+   ============================================================ */
+
+/* ── Pagination wrapper ───────────────────────────────────── */
+.pagination-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pagination-info {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+}
+
+.pagination-info strong { color: var(--text-primary); font-weight: 600; }
+
+/* ── Controls ─────────────────────────────────────────────── */
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--card-bg);
+    font-size: 12.5px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    line-height: 1;
+}
+
+.pagination-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: var(--text-primary);
+}
+
+.pagination-btn.active {
+    background: var(--royal);
+    border-color: var(--royal);
+    color: #ffffff;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.pagination-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+}
+
+.pagination-btn i { font-size: 14px; }
+
+.pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ── Filter panel ─────────────────────────────────────────── */
+.jobs-filters-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: calc(var(--topbar-height) + 16px);
+}
+
+.filters-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filters-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+.filters-title i { color: var(--royal); }
+
+.filters-clear {
+    font-size: 11.5px;
+    color: var(--royal);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color var(--transition);
+}
+
+.filters-clear:hover { color: var(--navy); }
+
+/* Filter group */
+.filter-group {
+    margin-bottom: 16px;
+}
+
+.filter-group:last-child { margin-bottom: 0; }
+
+.filter-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+/* Radio / checkbox options */
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 0;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.filter-option:hover .filter-option-label { color: var(--royal); }
+
+.filter-option input[type="radio"],
+.filter-option input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--royal);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.filter-option-label {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    flex: 1;
+}
+
+.filter-option-count {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    padding: 1px 6px;
+    border-radius: 10px;
+}
+
+/* Filter select */
+.filter-select {
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 12.5px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--card-bg);
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--transition);
+}
+
+.filter-select:focus { border-color: var(--royal); }
+
+/* Salary range inputs */
+.salary-filter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.salary-filter-input {
+    width: 100%;
+    padding: 7px 9px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--card-bg);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color var(--transition);
+}
+
+.salary-filter-input:focus { border-color: var(--royal); }
+
+/* Apply filter button */
+.btn-apply-filters {
+    width: 100%;
+    margin-top: 14px;
+    padding: 9px;
+    background: var(--royal);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.btn-apply-filters:hover { background: var(--navy); }
+
+/* ── Application status timeline ──────────────────────────── */
+.app-timeline {
+    position: relative;
+    padding: 4px 0;
+}
+
+.app-timeline-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 22px;
+    position: relative;
+}
+
+.app-timeline-step:last-child { padding-bottom: 0; }
+
+/* Vertical line connector */
+.app-timeline-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 28px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+}
+
+.app-timeline-step.completed:not(:last-child)::after {
+    background: var(--royal);
+}
+
+/* Step icon */
+.timeline-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+    font-size: 13px;
+    border: 2px solid;
+}
+
+.timeline-icon.completed {
+    background: var(--royal);
+    border-color: var(--royal);
+    color: #ffffff;
+}
+
+.timeline-icon.current {
+    background: #eff6ff;
+    border-color: var(--royal);
+    color: var(--royal);
+    box-shadow: 0 0 0 4px rgba(26,58,143,0.1);
+}
+
+.timeline-icon.pending {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+.timeline-icon.rejected {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+/* Step content */
+.timeline-content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 4px;
+}
+
+.timeline-status {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 2px;
+}
+
+.timeline-status.pending-label { color: var(--text-muted); }
+.timeline-status.current-label { color: var(--royal); }
+
+.timeline-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0 0 3px;
+}
+
+.timeline-note {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    background: #f8fafc;
+    padding: 5px 9px;
+    border-radius: var(--radius-sm);
+    border-left: 2px solid var(--border-color);
+    margin: 4px 0 0;
+}
+
+/* ── Mobile filter toggle button ──────────────────────────── */
+.btn-filter-toggle {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-secondary);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-filter-toggle:hover { background: #f1f5f9; }
+
+@media (max-width: 768px) {
+    .btn-filter-toggle { display: inline-flex; }
+    .pagination-wrap { justify-content: center; }
+    .pagination-info { width: 100%; text-align: center; }
+}
